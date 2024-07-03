@@ -11,10 +11,16 @@ const Wrapper = styled.div`
   padding: 20px;
   background-color: #f0f0f0;
 `;
+const Title = styled.h1`
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 20px;
+`;
 
 const AnalysisView = () => {
   return (
     <Wrapper>
+        <Title>Customers Leave Reasons</Title>
       <div> /* Placeholder for other components */
         
       </div>

@@ -14,13 +14,8 @@ const Container = styled.div`
   width: 100%;
 `;
 
-const Title = styled.h1`
-  font-size: 2rem;
-  color: #333;
-  margin-bottom: 20px;
-`;
-
 const DropzoneContainer = styled.div`
+  cursor: pointer;
   width: 80%;
   max-width: 600px;
   height: 200px;
@@ -127,9 +122,34 @@ const MainTool = () => {
     setError('');
   };
 
+  const handleSubmit = async () => {
+    if (!file) return;
+  
+    const formData = new FormData();
+    formData.append('file', file);
+  
+    try {
+      const response = await fetch('http://127.0.0.1:5000/upload', {
+        method: 'POST',
+        body: formData,
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        console.log('File uploaded:', data.filename);
+        // Optionally handle success message or further processing
+        // You can use data.download_url to access the download link if provided
+      } else {
+        console.error('Failed to upload file');
+      }
+    } catch (error) {
+      console.error('Error uploading file:', error);
+    }
+  };
+  
+  
   return (
     <Container>
-      <Title>Customers Leave Reasons</Title>
       <DropzoneContainer {...getRootProps({ isDragActive })}>
         <input {...getInputProps()} />
         {isDragActive ? (
@@ -151,7 +171,7 @@ const MainTool = () => {
         <SubmitCancel>
           <Button onClick={handleCancel}>Cancel</Button>
           {/* Add Submit functionality here */}
-          <Button >Submit</Button>
+          <Button onClick={handleSubmit} >Submit</Button>
         </SubmitCancel>
       )}
     </Container>

@@ -1,7 +1,14 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+
+// Define a global style for applying Nunito font to the entire app
+const GlobalStyle = createGlobalStyle`
+  body {
+    font-family: 'Nunito', sans-serif;
+    font-optical-sizing: auto;
+  }
+`;
 
 const Nav = styled.nav`
   background-color: #00008B;
@@ -24,18 +31,17 @@ const NavLink = styled(Link)`
 `;
 
 const Header = () => {
-  const [loggedin, setLoggedIn] = useState(true);
+  // const [loggedin, setloggedin] = useState(false); ADD WHEN USER AUTHENTICATION
   return (
-    <Nav>
-      <NavLink to="/">Main Page</NavLink>
-      {loggedin &&
-      <NavLink to="/profile">Profile</NavLink>
-      }
-      {!loggedin && 
-      <NavLink to="/login">Log In</NavLink>
-      }
-      {/* Add more links as needed */}
-    </Nav>
+    <>
+      <GlobalStyle /> {/* Apply Nunito font globally */}
+      <Nav>
+        <NavLink to="/" className="nunito-header-link">Main Page</NavLink>
+        <NavLink to="/profile" className="nunito-header-link">Profile</NavLink>
+        <NavLink to="/login" className="nunito-header-link">Log In</NavLink>
+        {/* Add more links as needed */}
+      </Nav>
+    </>
   );
 };
 
