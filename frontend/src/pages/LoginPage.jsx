@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link, useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { AuthContext } from '../contexts/AuthContext';
 
 const Container = styled.div`
   display: flex;
@@ -78,6 +80,7 @@ const LoginPage = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const {login} = useContext(AuthContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -95,6 +98,7 @@ const LoginPage = () => {
       if (response.ok) {
         console.log('Login successful');
         // Redirect to another page or show success message
+        login();
         navigate('/');  // Redirect to MainTool page
       } else {
         setError(data.error);

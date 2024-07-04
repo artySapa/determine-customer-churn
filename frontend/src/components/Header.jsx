@@ -1,7 +1,8 @@
 import React from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import { Link } from 'react-router-dom';
-
+import { useContext } from 'react';
+import { AuthContext } from '../contexts/AuthContext';
 // Define a global style for applying Nunito font to the entire app
 const GlobalStyle = createGlobalStyle`
   body {
@@ -32,14 +33,22 @@ const NavLink = styled(Link)`
 
 const Header = () => {
   // const [loggedin, setloggedin] = useState(false); ADD WHEN USER AUTHENTICATION
+  const {isAuthenticated, logout} = useContext(AuthContext);
   return (
     <>
       <GlobalStyle /> {/* Apply Nunito font globally */}
       <Nav>
         <NavLink to="/" className="nunito-header-link">Main Page</NavLink>
+        {isAuthenticated ?
+        <>
         <NavLink to="/profile" className="nunito-header-link">Profile</NavLink>
+        <NavLink onClick={logout} style={{ color: 'white', background: 'none', border: 'none', cursor: 'pointer' }}>
+            Logout
+          </NavLink>
+        </>
+        :
         <NavLink to="/login" className="nunito-header-link">Log In</NavLink>
-        {/* Add more links as needed */}
+        }
       </Nav>
     </>
   );

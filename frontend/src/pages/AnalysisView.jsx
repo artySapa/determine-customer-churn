@@ -1,8 +1,12 @@
 import React from 'react';
 import MainTool from '../components/MainTool';
 import styled from 'styled-components';
+import { AuthContext } from '../contexts/AuthContext';
+import { useContext } from 'react';
+import WelcomePage from "../components/WelcomePage";
 
 const Wrapper = styled.div`
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -18,13 +22,17 @@ const Title = styled.h1`
 `;
 
 const AnalysisView = () => {
+    const {isAuthenticated, logout} = useContext(AuthContext);
   return (
     <Wrapper>
+        {isAuthenticated ?
+        <>
         <Title>Customers Leave Reasons</Title>
-      <div> /* Placeholder for other components */
-        
-      </div>
       <MainTool />
+      </>
+      :
+      <WelcomePage/>
+        }
     </Wrapper>
   );
 };
