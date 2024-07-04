@@ -177,7 +177,7 @@ const MainTool = () => {
 
   return (
     <Wrapper>
-      <DropzoneContainer {...getRootProps()} isDragActive={isDragActive}>
+      <DropzoneContainer {...getRootProps()} isdragactive={isDragActive}>
         <input {...getInputProps()} />
         <p>Drop your .xlsx file here, or click to select from your computer</p>
         {loading && <LoadingIndicator>Loading...</LoadingIndicator>}
@@ -198,6 +198,7 @@ const MainTool = () => {
           </SubmitCancel>
         )}
         {analysis && (
+          <>
           <AnalysisResult>
             <h3>Analysis Result</h3>
             <p>Average Age: {analysis.average_age}</p>
@@ -208,6 +209,8 @@ const MainTool = () => {
               ))}
             </ul>
           </AnalysisResult>
+          <Button>Save the Results</Button>
+          </>
         )}
       </Container>
     </Wrapper>
