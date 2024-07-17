@@ -25,14 +25,16 @@ const AnalysisView = () => {
     const {isAuthenticated, logout} = useContext(AuthContext);
   return (
     <Wrapper>
-        {isAuthenticated ?
+        {/* {isAuthenticated ?
         <>
         <Title>Customers Leave Reasons</Title>
       <MainTool />
       </>
       :
       <WelcomePage/>
-        }
+        } */}
+        <Title>Customers Leave Reasons</Title>
+        <MainTool />
     </Wrapper>
   );
 };
