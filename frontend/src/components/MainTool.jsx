@@ -162,6 +162,7 @@ const MainTool = () => {
       if (response.ok) {
         const result = await response.json();
         console.log('File uploaded:', result.filename);
+        console.log("analysis: >>>>>>>>>", typeof(result.analysis));
         setAnalysis(result.analysis);
         setLoading(false);
         containerRef.current.scrollTo({ top: containerRef.current.scrollHeight, behavior: 'smooth' });
@@ -200,14 +201,26 @@ const MainTool = () => {
         {analysis && (
           <>
           <AnalysisResult>
-            <h3>Analysis Result</h3>
-            <p>Average Age: {analysis.average_age}</p>
-            <p>Gender Distribution:</p>
-            <ul>
-              {Object.entries(analysis.gender_distribution).map(([gender, count]) => (
-                <li key={gender}>{gender}: {count}</li>
-              ))}
-            </ul>
+            <h2>Analysis Result</h2>
+            <h3>Values:</h3>
+            {Object.values(analysis).map((name, index) => {
+              return (
+              <div key={index}>
+                  {name}
+              </div>
+            );
+            })}
+            <h3>Keys:</h3>
+            {Object.keys(analysis).map((name, index) => {
+              return (
+              <div key={index}>
+                  {name}
+              </div>
+            );
+            })}
+          {/* <p>{analysis.values()}</p> */}
+            {/* <p>{analysis.feature}</p>
+            <p>{analysis.importance}</p> */}
           </AnalysisResult>
           <Button>Save the Results</Button>
           </>
